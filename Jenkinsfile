@@ -1,7 +1,8 @@
 pipeline {
   agent {
-    node {
-      label 'node'
+    docker {
+      image 'node/node:lts-alpine'
+      args '-p 3000:3000'
     }
 
   }
@@ -14,7 +15,7 @@ pipeline {
 
     stage('Test') {
       steps {
-        sh './jenkins/scripts/test.sh'
+        sh 'npm test'
       }
     }
 
